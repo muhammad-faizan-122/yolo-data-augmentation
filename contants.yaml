@@ -2,6 +2,5 @@ inp_img_pth : input-ds/images
 inp_lab_pth : input-ds/labels
 out_img_pth : out-aug-ds/images
 out_lab_pth : out-aug-ds/labels
-valid_pth: validation
 transformed_file_name : aug_out
 CLASSES : [obj1, obj2, obj3]
