@@ -10,5 +10,5 @@ def save_aug_lab(transformed_bboxes, out_lab_pth, lab_name):
 
 
 def save_aug_image(transformed_image, out_img_pth, img_name):    
-    out_img_path = os.path.join(out_img_pth,img_name + ".png")
+    out_img_path = os.path.join(out_img_pth,img_name)
     cv2.imwrite(out_img_path, transformed_image)

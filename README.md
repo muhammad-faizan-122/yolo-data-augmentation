@@ -1,10 +1,7 @@
 # How to apply data augmentation on YOLOv5 or YOLOv8 dataset and save the augmented results.
 ## input 
 ![input image](input-ds/images/image_1.jpg)
-![input label](input-ds/images/image_1.jpg)
-## output
-![output]()
-
+![input label](out-aug-ds/images/image_1_aug_out.png)
 
 - **input-ds** contain the input of YOLOv8 and YOLOv5 which are following directories.
     - Images directory contains the images
@@ -19,7 +16,9 @@
     - **get_album_bb.py** is used to get labels in albumentation format from input yolo format.
     - **workflow.py** contain the pipeline to get the desired results.
     - **save_augs.py** to save the augmented results.
-- step to apply augmentation on dataset.
+- **CONSTANT.yaml** contain following contants need to update on according to your case.
+    - 
+- step to apply augmentation on your own dataset.
     - install requirements using ```pip install -r requirements.txt```
     - provide the input and output path in **CONSTANT.yaml** file.
     - provide the provide transformed
