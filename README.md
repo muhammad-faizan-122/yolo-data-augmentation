@@ -1,4 +1,10 @@
 # How to apply data augmentation on YOLOv5 or YOLOv8 dataset and save the augmented results.
+## input 
+![input image](input-ds/images/image_1.jpg)
+![input label](input-ds/images/image_1.jpg)
+## output
+![output]()
+
 
 - **input-ds** contain the input of YOLOv8 and YOLOv5 which are following directories.
     - Images directory contains the images
