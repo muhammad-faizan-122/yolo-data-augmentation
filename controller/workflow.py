@@ -17,4 +17,4 @@ def run_pipeline():
         image = cv2.imread(os.path.join(CONSTANTS["inp_img_pth"], img_file))           
         lab_pth = os.path.join(CONSTANTS["inp_lab_pth"], file_name + '.txt')                                
         album_bboxes = get_bboxes_list(lab_pth, CONSTANTS['CLASSES'])
-        apply_aug(image, album_bboxes, CONSTANTS["out_lab_pth"],  CONSTANTS["out_img_pth"], aug_file_name)
+        apply_aug(image, album_bboxes, CONSTANTS["out_lab_pth"],  CONSTANTS["out_img_pth"], aug_file_name, CONSTANTS['CLASSES'])

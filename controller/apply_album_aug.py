@@ -1,11 +1,11 @@
 from controller.album_to_yolo_bb import multi_obj_bb_yolo_conversion
-from controller.album_to_yolo_bb import single_obj_bb_yolo_format
+from controller.album_to_yolo_bb import single_obj_bb_yolo_conversion
 from controller.save_augs import save_aug_image, save_aug_lab
 from controller.validate_results import draw_yolo
 import albumentations as A
 
 
-def apply_aug(image, bboxes, out_lab_pth, out_img_pth, transformed_file_name):
+def apply_aug(image, bboxes, out_lab_pth, out_img_pth, transformed_file_name, classes):
     transform = A.Compose([
         A.RandomCrop(width=300, height=300),
         A.HorizontalFlip(p=0.5),
@@ -20,12 +20,12 @@ def apply_aug(image, bboxes, out_lab_pth, out_img_pth, transformed_file_name):
     tot_objs = len(bboxes)
     if tot_objs != 0:        
         if tot_objs > 1:
-            transformed_bboxes = multi_obj_bb_yolo_conversion(transformed_bboxes)
-            save_aug_lab(transformed_bboxes, out_lab_pth, transformed_file_name + ".txt")        
+            transformed_bboxes = multi_obj_bb_yolo_conversion(transformed_bboxes, classes)
+            save_aug_lab(transformed_bboxes, out_lab_pth, transformed_file_name + ".txt")
         else:
-            transformed_bboxes = [single_obj_bb_yolo_format(transformed_bboxes[0])]
-            save_aug_lab(transformed_bboxes, out_lab_pth, transformed_file_name + ".txt")        
-        save_aug_image(transformed_image, out_img_pth, transformed_file_name + ".png")                
+            transformed_bboxes = [single_obj_bb_yolo_conversion(transformed_bboxes[0]), classes]
+            save_aug_lab(transformed_bboxes, out_lab_pth, transformed_file_name + ".txt")
+        save_aug_image(transformed_image, out_img_pth, transformed_file_name + ".png")             
         draw_yolo(transformed_image, transformed_bboxes)
     else:
         print("label file is empty")        

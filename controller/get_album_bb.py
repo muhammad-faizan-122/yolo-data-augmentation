@@ -1,17 +1,12 @@
-def get_album_bb_list(yolo_bbox, classes):
+def get_album_bb_list(yolo_bbox, class_names):    
     album_bb =[]
     str_bbox_list = yolo_bbox.split(' ')        
-    for index, value in enumerate(str_bbox_list):
-        if index == 0:
-            if value == '0':
-                class_ = classes[0]
-            elif value == '1':
-                class_ = classes[1]
-            elif value == '2':
-                class_ = classes[2]
+    for index, value in enumerate(str_bbox_list):        
+        if index == 0:  # class number is placed at index 0
+            class_name = class_names[int(value)]            
         else:
             album_bb.append(float(value))    
-    album_bb.append(class_)    
+    album_bb.append(class_name)  # [x_center, y_center, width, height, class_name]
     return album_bb
 
 

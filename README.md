@@ -1,5 +1,6 @@
 # Apply data augmentation on YOLOv5 or YOLOv8 dataset using Albumentations Library
 Albumentations is a Python library for image augmentation that offers a simple and flexible way to perform a variety of image transformations.
+
 ## Input 
 ![input image](input-ds/images/image_1.jpg)
 ## Output
@@ -33,6 +34,5 @@ Albumentations is a Python library for image augmentation that offers a simple a
     - install requirements using ```pip install -r requirements.txt```
     - provide the input and output path in **CONSTANT.yaml** file.
     - update the name of transformed_file_name in CONSTANT.yaml
-    - Update the list of classes list in CONSTANT.yaml
-    - update the classes name in according to your case in controller/get_album_bb.py and controller/get_album_bb.py
+    - Provide the list of classes in CONSTANT.yaml in a sequence as use to assign class number in yolo dataset labelling. For example you provide class list ['obj1', 'obj2', 'obj3'] for obj1 class number use in label file should be 0, for 'obj2' class number should be 1 and so on.
     - run the pipeline using ```python3 run.py```
