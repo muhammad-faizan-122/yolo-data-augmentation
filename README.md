@@ -25,10 +25,11 @@
     - out_lab_pth for output labels path
     - transformed_file_name: use to name augmented output to differentiate from other input dataset.
     - CLASSES: list of input class name according to class number. 
+## Usage
 - step to apply augmentation on your own dataset.
     - install requirements using ```pip install -r requirements.txt```
     - provide the input and output path in **CONSTANT.yaml** file.
     - update the name of transformed_file_name in CONSTANT.yaml
     - Update the list of classes list in CONSTANT.yaml
     - update the classes name in according to your case in controller/get_album_bb.py and controller/get_album_bb.py
-    - run the ```script python3 run.py```
+    - run the pipeline using ```python3 run.py```
