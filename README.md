@@ -1,4 +1,5 @@
-# How to apply data augmentation on YOLOv5 or YOLOv8 dataset and save the augmented results.
+# Apply data augmentation on YOLOv5 or YOLOv8 dataset using Albumentations Library
+Albumentations is a Python library for image augmentation that offers a simple and flexible way to perform a variety of image transformations.
 ## Input 
 ![input image](input-ds/images/image_1.jpg)
 ## Output
