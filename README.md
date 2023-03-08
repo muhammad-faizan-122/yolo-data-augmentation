@@ -5,6 +5,8 @@
 ![input label](out-aug-ds/images/image_1_aug_out.png)
 ## Output Visualization
 ![input label](output_vis.png)
+
+## Directories description
 - **input-ds** contain the input of YOLOv8 and YOLOv5 which are following directories.
     - Images directory contains the images
     - labels directory contains the .txt files. Each .txt file contains the normalized bounding boxes in a following format.
