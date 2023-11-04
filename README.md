@@ -1,5 +1,5 @@
-# Apply data augmentation on YOLOv5 or YOLOv8 dataset using Albumentations Library
-Albumentations is a Python library for image augmentation that offers a simple and flexible way to perform a variety of image transformations.
+# YOLOv5/YOLOv8 Data Augmentation with Albumentations
+This GitHub repository offers a solution for augmenting datasets for YOLOv8 and YOLOv5 using the Albumentations library. Albumentations is a Python package designed for image augmentation, providing a simple and flexible approach to perform various image transformations.
 
 ## Input 
 ![input image](input-ds/images/image_1.jpg)
@@ -15,7 +15,8 @@ Albumentations is a Python library for image augmentation that offers a simple a
 - **out-aug-ds** contain the augmented output contains following directories.
     - Images directory contains the augmented images.
     - labels directory contains the augmented labels.
-- **utils.py**: Contains all user-defined helper function
+- **bb_image** This directory contains images with bounding boxes for visualizing the results of augmented data. This is for validation; bounding boxes should be correctly drawn on the objects of interest.
+- **utils.py**: Contains all user-defined helper function.
 - **main.py**: Contains Yolo dataset augmentor pipeline
 - **CONSTANT.yaml** contain following contants need to update on according to your case.
     - inp_img_pth for input images path
@@ -33,9 +34,11 @@ Albumentations is a Python library for image augmentation that offers a simple a
         ```
     - Provide the input and output path in **CONSTANT.yaml** file.
     - Update the name of transformed_file_name in CONSTANT.yaml otherwise code will overwrite last augmentations.
-    - Provide the list of classes in CONSTANT.yaml in a sequence as use to assign class number in yolo dataset labelling. 
-        - For example, you provided class list is ```['obj1', 'obj2', 'obj3']``` class number used for obj1 in label file should be 0, similarly for 'obj2' class number should be 1 and so on.
+    - Provide the list of name of  classes in CONSTANT.yaml in a same sequence as used to assign class numbers in the YOLO dataset labeling.
+        - For example, if you provided a class list as ```['obj1', 'obj2', 'obj3']```, the class number used for 'obj1' in the label file should be 0, similarly for 'obj2', the class number should be 1, and so on.
     - Run the pipeline using 
         ```
         python3 run.py
         ```
+
+

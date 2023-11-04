@@ -104,13 +104,7 @@ def get_bboxes_list(inp_lab_pth, classes):
         return []
 
     lines = [line.strip() for line in yolo_str_labels.split("\n") if line.strip()]
-
-    if len(lines) > 1:
-        print("multi-objs")
-        album_bb_lists = get_album_bb_lists("\n".join(lines), classes)
-    else:
-        print("single-obj")
-        album_bb_lists = [get_album_bb_list("\n".join(lines), classes)]
+    album_bb_lists = get_album_bb_lists("\n".join(lines), classes) if len(lines) > 1 else [get_album_bb_list("\n".join(lines), classes)]
 
     return album_bb_lists
 
@@ -181,7 +175,7 @@ def save_aug_image(transformed_image, out_img_pth, img_name):
     cv2.imwrite(out_img_path, transformed_image)
 
 
-def draw_yolo(image, labels):
+def draw_yolo(image, labels, file_name):
     """
     Draw bounding boxes on an image based on YOLO format.
 
@@ -196,19 +190,34 @@ def draw_yolo(image, labels):
         box_voc = pbx.convert_bbox(tuple(yolo_normalized), from_type="yolo", to_type="voc", image_size=(W, H))
         cv2.rectangle(image, (box_voc[0], box_voc[1]),
                       (box_voc[2], box_voc[3]), (0, 0, 255), 1)
-    cv2.imwrite("output_vis.png", image)
-    cv2.imshow("output_vis", image)
-    cv2.waitKey(0)
+    cv2.imwrite(f"bb_image/{file_name}.png", image)
+    # cv2.imshow(f"{file_name}.png", image)
+    # cv2.waitKey(0)
 
 
-def apply_augmentation(image, bboxes, transformed_file_name):
+def has_negative_element(lst):
     """
-    Apply augmentations to an image and save the results.
+    Check if the given list contains any negative element.
 
     Args:
-        image (numpy.ndarray): Input image.
-        bboxes (list): List of bounding boxes.
-        transformed_file_name (str): Name of the transformed file.
+        lst (list): List of elements.
+
+    Returns:
+        bool: True if there is any negative element, False otherwise.
+    """
+    return any(x < 0 for x in lst)
+
+
+def get_augmented_results(image, bboxes):
+    """
+    Apply data augmentation to an input image and bounding boxes.
+
+    Parameters:
+    - image (numpy.ndarray): Input image.
+    - bboxes (list): List of bounding boxes in YOLO format [x_center, y_center, width, height, class_name].
+
+    Returns:
+    - tuple: A tuple containing the augmented image and the transformed bounding boxes.
     """
     # Define the augmentations
     transform = A.Compose([
@@ -222,17 +231,47 @@ def apply_augmentation(image, bboxes, transformed_file_name):
     # Apply the augmentations
     transformed = transform(image=image, bboxes=bboxes)
     transformed_image, transformed_bboxes = transformed['image'], transformed['bboxes']
+    
+    return transformed_image, transformed_bboxes
 
-    tot_objs = len(transformed_bboxes)
+
+def has_negative_element(matrix):
+    """
+    Check if there is a negative element in the 2D list of augmented bounding boxes.
+
+    Args:
+        matrix (list[list]): The 2D list.
+
+    Returns:
+        bool: True if a negative element is found, False otherwise.
+
+    """
+    return any(element < 0 for row in matrix for element in row)
+
+
+def save_augmentation(trans_image, trans_bboxes, trans_file_name):
+    """
+    Saves the augmented label and image if no negative elements are found in the transformed bounding boxes.
+
+    Parameters:
+        trans_image (numpy.ndarray): The augmented image.
+        trans_bboxes (list): The transformed bounding boxes.
+        trans_file_name (str): The name for the augmented output.
+
+    Returns:
+        None
+    """
+    tot_objs = len(trans_bboxes)
     if tot_objs:
         # Convert bounding boxes to YOLO format
-        transformed_bboxes = multi_obj_bb_yolo_conversion(transformed_bboxes, CONSTANTS['CLASSES']) if tot_objs > 1 else [single_obj_bb_yolo_conversion(transformed_bboxes[0], CONSTANTS['CLASSES'])]
-
-        # Save augmented label and image
-        save_aug_lab(transformed_bboxes, CONSTANTS["out_lab_pth"], transformed_file_name + ".txt")
-        save_aug_image(transformed_image, CONSTANTS["out_img_pth"], transformed_file_name + ".png")
-
-        # Draw bounding boxes on the augmented image
-        draw_yolo(transformed_image, transformed_bboxes)
+        trans_bboxes = multi_obj_bb_yolo_conversion(trans_bboxes, CONSTANTS['CLASSES']) if tot_objs > 1 else [single_obj_bb_yolo_conversion(trans_bboxes[0], CONSTANTS['CLASSES'])]
+        if not has_negative_element(trans_bboxes):
+            # Save augmented label and image
+            save_aug_lab(trans_bboxes, CONSTANTS["out_lab_pth"], trans_file_name + ".txt")
+            save_aug_image(trans_image, CONSTANTS["out_img_pth"], trans_file_name + ".png")
+            # Draw bounding boxes on the augmented image
+            draw_yolo(trans_image, trans_bboxes, trans_file_name)
+        else:
+            print("Found Negative element in Transformed Bounding Box...")
     else:
         print("Label file is empty")
