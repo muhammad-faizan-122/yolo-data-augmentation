@@ -23,7 +23,7 @@ def apply_aug(image, bboxes, out_lab_pth, out_img_pth, transformed_file_name, cl
             transformed_bboxes = multi_obj_bb_yolo_conversion(transformed_bboxes, classes)
             save_aug_lab(transformed_bboxes, out_lab_pth, transformed_file_name + ".txt")
         else:
-            transformed_bboxes = [single_obj_bb_yolo_conversion(transformed_bboxes[0]), classes]
+            transformed_bboxes = [single_obj_bb_yolo_conversion(transformed_bboxes[0], classes)]
             save_aug_lab(transformed_bboxes, out_lab_pth, transformed_file_name + ".txt")
         save_aug_image(transformed_image, out_img_pth, transformed_file_name + ".png")             
         draw_yolo(transformed_image, transformed_bboxes)
