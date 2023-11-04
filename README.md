@@ -5,8 +5,6 @@ This GitHub repository offers a solution for augmenting datasets for YOLOv8 and 
 ![input image](input-ds/images/image_1.jpg)
 ## Output
 ![input label](out-aug-ds/images/image_1_aug_out.png)
-## Output Visualization
-![input label](output_vis.png)
 
 ## Directories description
 - **input-ds** contain the input of YOLOv8 and YOLOv5 which are following directories.
