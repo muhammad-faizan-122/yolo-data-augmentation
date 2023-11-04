@@ -15,7 +15,7 @@ Albumentations is a Python library for image augmentation that offers a simple a
 - **out-aug-ds** contain the augmented output contains following directories.
     - Images directory contains the augmented images.
     - labels directory contains the augmented labels.
-- **controller** contain following scripts.
+- **helper** contain following scripts.
     - **apply_album_aug.py** contain the augmentated operations.
     - **validate_results.py** draw the augmented labels on augmented image to visualize the results.
     - **album_to_yolo_bb.py** is used to convert to labels in albumentation format to yolo format

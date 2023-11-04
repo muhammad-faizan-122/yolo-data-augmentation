@@ -3,4 +3,4 @@ inp_lab_pth : input-ds/labels
 out_img_pth : out-aug-ds/images
 out_lab_pth : out-aug-ds/labels
 transformed_file_name : aug_out
-CLASSES : [obj1, obj2, obj3]
+CLASSES : [obj1, obj2, obj3, 'obj4']
