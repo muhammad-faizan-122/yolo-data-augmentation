@@ -1,5 +1,5 @@
 # YOLOv5/YOLOv8 Data Augmentation with Albumentations
-This GitHub repository offers a solution for augmenting datasets for YOLOv8 and YOLOv5 using the Albumentations library. Albumentations is a Python package designed for image augmentation, providing a simple and flexible approach to perform various image transformations.
+This GitHub repository offers a solution for augmenting datasets for YOLOv8 and YOLOv5 using the Albumentations library. Albumentations is a Python package designed for image augmentation, providing a simple and flexible approach to perform various image transformations. For more detail you can refer my medium [article](https://medium.com/red-buffer/apply-data-augmentation-on-yolov5-yolov8-dataset-958e89d4bc5d).
 
 ## Input 
 ![input image](input-ds/images/image_1.jpg)
